@@ -1,0 +1,46 @@
+# .github/workflows/terraform.yml
+
+name: "Terraform Google Cloud VM"
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  terraform:
+    name: "Terraform Apply"
+    runs-on: ubuntu-latest
+    permissions:
+        contents: 'read'
+        id-token: 'write'
+
+    steps:
+      # Passo 1: Checar o código
+      - name: "Checkout code"
+        uses: actions/checkout@v2
+
+      # Passo 2: Configurar o Google Cloud CLI
+      - name: "Set up Google Cloud"
+        uses: google-github-actions/setup-gcloud@v1
+        env:
+          service_account_key: ${{ secrets.GCP_SA_KEY }} # Service Account Key armazenada no GitHub Secrets
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      # Passo 3: Instalar o Terraform
+      - name: "Setup Terraform"
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.0
+
+      # Passo 4: Inicializar o Terraform
+      - name: "Terraform Init"
+        run: terraform init
+
+      # Passo 5: Verificar o plano do Terraform
+      - name: "Terraform Plan"
+        run: terraform plan
+
+      # Passo 6: Aplicar as mudanças do Terraform (com aprovação manual)
+      - name: "Terraform Apply"
+        run: terraform apply -auto-approve
