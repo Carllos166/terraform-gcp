@@ -7,4 +7,4 @@ machine_type   = "f1-micro"
 zone           = "us-central1-a"
 image          = "debian-cloud/debian-9"
 network        = "default"
-credentials_json = "third-circle-436817-u7-1947e22cc88f.json"
+
