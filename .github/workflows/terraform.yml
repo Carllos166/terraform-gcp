@@ -1,6 +1,4 @@
-# .github/workflows/terraform.yml
-
-name: "Terraform Google Cloud VM"
+name: Terraform
 
 on:
   push:
@@ -12,34 +10,40 @@ jobs:
     name: "Terraform Apply"
     runs-on: ubuntu-latest
     permissions:
-        contents: 'read'
-        id-token: 'write'
+      contents: 'read'
+      id-token: 'write'
 
     steps:
       # Passo 1: Checar o código
       - name: "Checkout code"
         uses: actions/checkout@v4
 
-      # Passo 2: Configurar o Google Cloud CLI
+      # Passo 2: Ler o arquivo de credenciais
+      - name: "Read credentials file"
+        id: creds
+        run: echo "::set-output name=credentials::$(cat third-circle-436817-u7-1947e22cc88f.json)"
+
+      # Passo 3: Configurar o Google Cloud CLI
       - name: "Set up Google Cloud"
         uses: 'google-github-actions/auth@v2'
         with:
-          credentials_json: ${{ vars.GCP_CREDENTIALS }} # Ensure this secret is set in your repository settings
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          credentials_json: ${{ steps.creds.outputs.credentials }}
 
-      # Passo 3: Instalar o Terraform
+      # Passo 4: Instalar o Terraform
       - name: "Setup Terraform"
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.5.0
 
-      # Passo 4: Inicializar o Terraform
+      # Passo 5: Inicializar o Terraform
       - name: "Terraform Init"
         run: terraform init
 
-      # Passo 5: Verificar o plano do Terraform
+      # Passo 6: Verificar o plano do Terraform
       - name: "Terraform Plan"
         run: terraform plan
 
-      # Passo 6: Aplicar as mudanças do Terraform (com aprovação manual)
+      # Passo 7: Aplicar as mudanças do Terraform (com aprovação manual)
       - name: "Terraform Apply"
         run: terraform apply -var-file="terraform.tfvars" -auto-approve
