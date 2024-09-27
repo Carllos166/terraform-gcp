@@ -19,8 +19,6 @@ jobs:
       # Passo 1: Checar o código
       - name: "Checkout code"
         uses: actions/checkout@v4
-        with:
-          path: ./terraform/main
 
 
       # Passo 2: Configurar o Google Cloud CLI
@@ -37,7 +35,7 @@ jobs:
 
       # Passo 4: Inicializar o Terraform
       - name: "Terraform Init"
-        run: cd /terraform/main && terraform init
+        run: cd ./terraform/main && terraform init
 
       # # Passo 5: Verificar o plano do Terraform
       # - name: "Terraform Plan"
@@ -45,5 +43,5 @@ jobs:
 
       # Passo 6: Aplicar as mudanças do Terraform (com aprovação manual)
       - name: "Terraform Apply"
-        run: cd /terraform/main && terraform apply -var-file="terraform.tfvars" -auto-approve
+        run: cd ./terraform/main && terraform apply -var-file="terraform.tfvars" -auto-approve
         
