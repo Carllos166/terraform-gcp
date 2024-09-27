@@ -27,7 +27,6 @@ jobs:
       - name: "Set up Google Cloud"
         uses: 'google-github-actions/auth@v2'
         env:
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
           credentials_json: ${{ steps.creds.outputs.credentials }}
 
       # Passo 4: Instalar o Terraform
