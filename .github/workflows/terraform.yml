@@ -24,8 +24,9 @@ jobs:
       - name: "Set up Google Cloud"
         uses: 'google-github-actions/auth@v2'
         env:
-          service_account_key: ${{ secrets.GCP_SA_KEY }} # Service Account Key armazenada no GitHub Secrets
           project_id: ${{ secrets.GCP_PROJECT_ID }}
+          credentials_json: ${{ secrets.GCP_CREDENTIALS }} # Service Account Key armazenada no GitHub Secrets
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
 
       # Passo 3: Instalar o Terraform
       - name: "Setup Terraform"
