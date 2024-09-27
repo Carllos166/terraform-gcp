@@ -19,6 +19,8 @@ jobs:
       # Passo 1: Checar o código
       - name: "Checkout code"
         uses: actions/checkout@v4
+        with:
+          path: ./terraform/main
 
 
       # Passo 2: Configurar o Google Cloud CLI
