@@ -11,10 +11,10 @@ output "instance_machine_type" {
 }
 
 output "instance_network" {
-  value = google_compute_instance.vm_instance.network_interface[0].network
+  value = google_compute_instance.vm_instance.network
 }
 
-output "instance_ip" {
-  value = google_compute_instance.vm_instance.network_interface[0].access_config[0].nat_ip
+output "image" {
+  value = google_compute_instance.vm_instance.image
 }
 
