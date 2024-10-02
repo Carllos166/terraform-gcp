@@ -41,9 +41,9 @@ jobs:
       - name: "Terraform Plan"
         run: cd ./terraform/main && terraform plan -var-file="terraform.tfvars"
 
-      # Passo 6: Aplicar as mudanças do Terraform (com aprovação manual)
-      - name: "Terraform Apply"
-        run: cd ./terraform/main && terraform apply -var-file="terraform.tfvars" -auto-approve
+      # # Passo 6: Aplicar as mudanças do Terraform (com aprovação manual)
+      # - name: "Terraform Apply"
+      #   run: cd ./terraform/main && terraform apply -var-file="terraform.tfvars" -auto-approve
         
        # Passo 7: Destruir as mudanças do Terraform (com aprovação manual)  
       - name: "Terraform Destroy"  
