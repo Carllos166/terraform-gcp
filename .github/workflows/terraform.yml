@@ -45,3 +45,6 @@ jobs:
       - name: "Terraform Apply"
         run: cd ./terraform/main && terraform apply -var-file="terraform.tfvars" -auto-approve
         
+       # Passo 7: Destruir as mudanças do Terraform (com aprovação manual)  
+      - name: "Terraform Destroy"  
+        run: cd ./terraform/main && terraform destroy -target google_compute_instance.default -auto-approve
