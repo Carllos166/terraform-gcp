@@ -12,7 +12,8 @@ resource "google_compute_instance" "default" {
   }
 
   network_interface {
-    network = var.network
+    network    = var.network
+    subnetwork = "sub2"
     access_config {
     }
   }
