@@ -6,5 +6,5 @@ instance_name    = "vm-instance"
 machine_type     = "f1-micro"
 zone             = "us-central1-a"
 image            = "debian-cloud/debian-11"
-vpc_network_name = "default"
+
 
