@@ -32,3 +32,12 @@ variable "network" {
   description = "Rede da instância"
   type        = string
 }
+
+variable "subnets" {
+  description = "A list of subnets"
+  type        = list(object({
+    name           = string
+    cidr_block     = string
+    region         = string
+  }))
+}
