@@ -6,14 +6,7 @@ resource "google_compute_network" "vpc_network" {
 }
 
 data "google_compute_subnetwork" "default" {
-  for_each = {
-    for s in google_compute_subnetwork.all_subnetworks.subnetworks : s.name => s
-    if s.network == google_compute_network.vpc_network.self_link
-  }
-  name   = each.value.name
-  region = each.value.region
-}
-
-data "google_compute_subnetwork" "all_subnetworks" {
-  project = var.gcp_project_id
+  for_each = google_compute_network.vpc_network.self_link
+  name     = each.value
+  region   = var.region
 }
