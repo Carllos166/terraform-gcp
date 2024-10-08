@@ -23,7 +23,7 @@ variable "network" {
   type        = string
 }
 
-variable "subnets" {
-  description = "Subrede da instância"
+variable "subnet" {
+  description = "Rede da instância"
   type        = string
-} 
+}
