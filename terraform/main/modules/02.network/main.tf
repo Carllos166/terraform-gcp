@@ -6,7 +6,7 @@ resource "google_compute_network" "vpc_network" {
 }
 
 data "google_compute_subnetwork" "default" {
-  count  = length(google_compute_network.vpc_network.subnetworks)
-  name   = element(google_compute_network.vpc_network.subnetworks, count.index)
+  count  = length(google_compute_network.vpc_network.subnet)
+  name   = element(google_compute_network.vpc_network.subnet, count.index)
   region = var.region
 }
